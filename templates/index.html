@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKD Medical Report System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p2xQp7g/0U+7Yb3nXwj5gI72kN5yZ9rxpXY0M5HCoZXXtBvINHGyb/U3+AkU9UQdUujS6h+78Zg0a9AS5N5d0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="top-nav">
+            <div class="brand">
+                <div class="brand-logo">
+                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M560 224h-16V80c0-26.5-21.5-48-48-48H80C53.5 32 32 53.5 32 80v144H16C7.2 224 0 231.2 0 240v240c0 8.8 7.2 16 16 16h176V336h64v160h128V256h64v240h176c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16zM64 96h448v112H64V96zm320 224h-64v-64h-64v64H64V272h448v48H384z"/>
+                </svg>
+            </div>
+                <div>
+                    <p class="brand-title">CKD Predictor</p>
+                    <span class="brand-subtitle">Kidney Care Intelligence</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#upload"><i class="fa-solid fa-file-arrow-up"></i> Upload</a></li>
+                <li><a href="#patient"><i class="fa-solid fa-user-doctor"></i> Patient</a></li>
+                <li><a href="#summary"><i class="fa-solid fa-chart-pie"></i> Summary</a></li>
+            </ul>
+        </nav>
+
+        <header class="intro-panel">
+            <div class="intro-copy">
+                <span class="eyebrow">Premium CKD Dashboard</span>
+                <h1>Chronic Kidney Diasease Predictor</h1>
+                <p class="intro-text">Upload pathology reports, extract lab values, and generate a polished medical report with intelligent CKD staging.</p>
+            </div>
+
+            <div class="intro-visual">
+                <div class="visual-card">
+                    <div class="visual-badge">
+                        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M466.5 83.7L272 26.4c-5-1.7-10.4-1.7-15.4 0L45.5 83.7C22.9 90.1 4.5 109.5 0 132.1 0 290.9 94.8 430.4 238.9 502.6c8.7 4 18.7 4 27.4 0C417.2 430.4 512 290.9 512 132.1c-4.5-22.6-22.9-42-45.5-48.4zM352 224c0 17.7-14.3 32-32 32h-64v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V256h-64c-17.7 0-32-14.3-32-32s14.3-32 32-32h64v-64c0-17.7 14.3-32 32-32s32 14.3 32 32v64h64c17.7 0 32 14.3 32 32z"/>
+                        </svg>
+                    </div>
+                    <h2>Modern clinical workflow</h2>
+                    <p>Designed for doctors, clinics, and health teams needing fast and reliable CKD insights.</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-grid">
+            <section id="upload" class="panel upload-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2><i class="fa-solid fa-file-import"></i> Upload Lab Report</h2>
+                        <p>Drag &amp; drop a pathology image or PDF to automatically extract key lab values.</p>
+                    </div>
+                    <span class="step-tag">Step 1</span>
+                </div>
+                <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+                    <div class="file-drop-area">
+                        <label class="file-label" for="lab_report">
+                            <div class="file-icon">
+                                <svg aria-hidden="true" width="24" height="24" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M537.6 226.6C539.4 218.8 540.8 210.9 540.8 203.2 540.8 118.6 469.2 48 384 48c-43.4 0-82.5 17.3-110.3 44.7C246.1 72.3 210.1 56 171.2 56 86 56 14.4 126.6 14.4 211.2c0 18.5 2.7 36.6 7.9 53.8C2.6 278.6 0 298.7 0 320 0 393.9 58.1 448 129.6 448H400c97.2 0 176-78.8 176-176 0-12.2-1.4-24.1-4.4-35.4zM444.7 276.7L360 361.4V224c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v137.4L195.3 276.7c-9.4-9.4-24.6-9.4-33.9 0l-22.6 22.6c-9.4 9.4-9.4 24.6 0 33.9l146.7 146.7c9.4 9.4 24.6 9.4 33.9 0l146.7-146.7c9.4-9.4 9.4-24.6 0-33.9l-22.6-22.6c-9.3-9.4-24.5-9.4-33.8 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="file-title">Drop report here or browse</p>
+                                <p class="file-subtitle">Accepted: PNG, JPG, JPEG, PDF</p>
+                            </div>
+                        </label>
+                        <input id="lab_report" type="file" name="lab_report" required>
+                    </div>
+                    <button type="submit" class="button button-primary">Upload & Extract</button>
+                </form>
+                {% if upload_message %}
+                <div class="alert success"><i class="fa-solid fa-circle-check"></i> {{ upload_message }}</div>
+                {% endif %}
+                {% if uploaded_filename %}
+                <div class="upload-status">
+                    <div class="upload-status-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                    <div>
+                        <p class="upload-status-title">Uploaded file</p>
+                        <p class="upload-status-file">{{ uploaded_filename }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </section>
+
+            <section id="patient" class="panel patient-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2><i class="fa-solid fa-user"></i> Patient Details</h2>
+                        <p>Review extracted values or enter the information manually for an accurate report.</p>
+                    </div>
+                    <span class="step-tag step-alt">Step 2</span>
+                </div>
+                <form action="/predict#summary" method="POST" class="form-grid">
+                    <div class="field-card full-width">
+                        <label for="patient-name">Patient Name</label>
+                        <input id="patient-name" type="text" name="name" value="{{ values.name }}" placeholder="Enter patient full name">
+                    </div>
+                    <div class="field-row">
+                        <div class="field-card">
+                            <label for="patient-age">Age</label>
+                            <input id="patient-age" type="text" name="age" value="{{ values.age }}" placeholder="Years">
+                        </div>
+                        <div class="field-card">
+                            <label for="patient-place">Place</label>
+                            <input id="patient-place" type="text" name="place" value="{{ values.place }}" placeholder="City / Location">
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <div class="section-header"><i class="fa-solid fa-droplet"></i> Renal Function</div>
+                        <div class="field-row">
+                            <div class="field-card">
+                                <label for="urea">Urea</label>
+                                <input id="urea" type="text" name="urea" value="{{ values.urea }}" placeholder="mg/dL">
+                            </div>
+                            <div class="field-card">
+                                <label for="creatinine">Creatinine</label>
+                                <input id="creatinine" type="text" name="creatinine" value="{{ values.creatinine }}" placeholder="mg/dL">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-card">
+                                <label for="specific-gravity">Specific Gravity</label>
+                                <input id="specific-gravity" type="text" name="sg" value="{{ values.sg }}" placeholder="e.g. 1.010">
+                            </div>
+                            <div class="field-card">
+                                <label for="albumin">Albumin</label>
+                                <input id="albumin" type="text" name="albumin" value="{{ values.albumin }}" placeholder="g/dL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <div class="section-header"><i class="fa-solid fa-heart-pulse"></i> Vital Signs</div>
+                        <div class="field-row">
+                            <div class="field-card">
+                                <label for="bp">Blood Pressure</label>
+                                <input id="bp" type="text" name="bp" value="{{ values.bp }}" placeholder="e.g. 140/90">
+                            </div>
+                            <div class="field-card">
+                                <label for="hemoglobin">Hemoglobin</label>
+                                <input id="hemoglobin" type="text" name="hemoglobin" value="{{ values.hemoglobin }}" placeholder="g/dL">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-card">
+                                <label for="sugar">Sugar</label>
+                                <input id="sugar" type="text" name="sugar" value="{{ values.sugar }}" placeholder="mg/dL">
+                            </div>
+                            <div class="field-card">
+                                <label for="glucose">Glucose</label>
+                                <input id="glucose" type="text" name="glucose" value="{{ values.glucose }}" placeholder="mg/dL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <div class="section-header"><i class="fa-solid fa-vial-circle-check"></i> Electrolytes</div>
+                        <div class="field-row">
+                            <div class="field-card">
+                                <label for="sodium">Sodium</label>
+                                <input id="sodium" type="text" name="sodium" value="{{ values.sodium }}" placeholder="mEq/L">
+                            </div>
+                            <div class="field-card">
+                                <label for="potassium">Potassium</label>
+                                <input id="potassium" type="text" name="potassium" value="{{ values.potassium }}" placeholder="mEq/L">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <div class="section-header"><i class="fa-solid fa-notes-medical"></i> Blood Profile</div>
+                        <div class="field-row">
+                            <div class="field-card">
+                                <label for="pcv">PCV</label>
+                                <input id="pcv" type="text" name="pcv" value="{{ values.pcv }}" placeholder="%">
+                            </div>
+                            <div class="field-card">
+                                <label for="wbc">WBC</label>
+                                <input id="wbc" type="text" name="wbc" value="{{ values.wbc }}" placeholder="count/µL">
+                            </div>
+                            <div class="field-card">
+                                <label for="rbc">RBC Status</label>
+                                <input id="rbc" type="text" name="rbc" value="{{ values.rbc }}" placeholder="Normal / Abnormal">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="uploaded_filename" value="{{ uploaded_filename }}">
+                    <button type="submit" name="action" value="preview" class="button button-accent">Preview CKD Stage</button>
+                    <button type="submit" name="action" value="generate" class="button button-secondary full-width">Generate Medical Report</button>
+                </form>
+            </section>
+
+            <section id="summary" class="panel summary-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2><i class="fa-solid fa-chart-line"></i> Analysis Summary</h2>
+                        <p>View extraction status, predicted CKD stage, and next-step recommendations.</p>
+                    </div>
+                    <div class="header-actions">
+                        <a href="/history#history" class="button button-secondary">Patient History</a>
+                        <span class="step-tag step-alt">Step 3</span>
+                    </div>
+                </div>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <small>Report File</small>
+                        <p>{{ uploaded_filename or 'None' }}</p>
+                    </div>
+                    <div class="status-card">
+                        <small>Predicted Stage</small>
+                        <p>{{ stage_data.stage if stage_data else 'N/A' }}</p>
+                    </div>
+                    <div class="status-card">
+                        <small>Risk Level</small>
+                        <p>{{ stage_data.risk if stage_data else 'N/A' }}</p>
+                    </div>
+                    {% if stage_data %}
+                    <div class="status-card">
+                        <small>Condition Severity</small>
+                        <p>{{ stage_data.recommendation.severity }}</p>
+                    </div>
+                    <div class="status-card">
+                        <small>Doctor Recommended</small>
+                        <p>{{ stage_data.recommendation.specialist }}</p>
+                    </div>
+                    <div class="status-card">
+                        <small>Check-in Timeframe</small>
+                        <p>{{ stage_data.recommendation.timeframe }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% if stage_data %}
+                <div class="summary-box">
+                    <h3>Stage Notes</h3>
+                    <p>{{ stage_data.details.desc }}</p>
+                    <ul>
+                        {% for item in stage_data.details.precautions %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <button id="ai-summary-toggle" type="button" class="button button-ai ai-summary-button">AI Summary</button>
+                <div id="ai-summary-panel" class="summary-box ai-summary-panel hidden">
+                    <h3>AI-powered Stage Summary</h3>
+                    <p>{{ stage_data.ai_summary }}</p>
+                </div>
+                {% else %}
+                <div class="summary-box muted">
+                    <p>Upload a report or enter lab values to see the CKD stage and recommendations.</p>
+                </div>
+                {% endif %}
+            </section>
+            {% if history_data %}
+            <section id="history" class="panel history-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2><i class="fa-solid fa-clock-rotate-left"></i> Patient History</h2>
+                        <p>Recent saved records with patient name, age and CKD result.</p>
+                    </div>
+                    <form action="/clear_history" method="POST" onsubmit="return confirm('Are you sure you want to delete all history records? This cannot be undone.');">
+                        <button type="submit" class="button button-danger"><i class="fa-solid fa-trash"></i> Clear History</button>
+                    </form>
+                </div>
+                <div class="history-table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Result</th>
+                                <th>Risk</th>
+                                <th>Date & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in history_data %}
+                            <tr>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.age }}</td>
+                                <td>{{ row.result }}</td>
+                                <td>{{ row.risk }}</td>
+                                <td>{{ row.date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            {% endif %}
+        </main>
+
+        <footer class="page-footer">
+            <p>© 2026 CKD Report Pro. Designed for better kidney care reporting.</p>
+        </footer>
+    </div>
+    <script>
+        const toggle = document.getElementById('ai-summary-toggle');
+        const panel = document.getElementById('ai-summary-panel');
+        if (toggle && panel) {
+            toggle.addEventListener('click', () => {
+                panel.classList.toggle('hidden');
+                toggle.textContent = panel.classList.contains('hidden') ? 'AI Summary' : 'Hide AI Summary';
+            });
+        }
+    </script>
+</body>
+</html>
